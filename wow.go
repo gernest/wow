@@ -1,6 +1,7 @@
 package wow
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"time"
@@ -32,27 +33,43 @@ type component struct {
 }
 
 type Wow struct {
-	c       []component
-	newLine bool
+	Text    string
+	Spinner spinner.Spinner
+	Out     io.Writer
+	done    func()
 }
 
-func New(newLine bool) *Wow {
-	return &Wow{newLine: newLine}
+func New(o io.Writer, s spinner.Spinner, text string) *Wow {
+	return &Wow{Out: o, Spinner: s, Text: text}
 }
 
-func (w *Wow) AddLine(s spinner.Spinner, txt string) {
-	w.c = append(w.c, component{s: s, txt: txt})
+func (w *Wow) Start() {
+	ctx, done := context.WithCancel(context.Background())
+	t := time.NewTicker(time.Duration(w.Spinner.Interval) * time.Millisecond)
+	w.done = done
+	go func() {
+		at := 0
+		for {
+			select {
+			case <-ctx.Done():
+				break
+			case <-t.C:
+				if at >= len(w.Spinner.Frames) {
+					at = 0
+				}
+				fmt.Fprint(w.Out, erase)
+				fmt.Fprint(w.Out, w.Spinner.Frames[at])
+				fmt.Fprintf(w.Out, " %s", w.Text)
+				at++
+			}
+		}
+	}()
+}
+
+func (w *Wow) Stop() {
+	w.done()
 }
 
 func pad(txt string) string {
 	return "  " + txt
-}
-
-func (w *Wow) RenderTo(o io.Writer) {
-	for _, c := range w.c {
-		Render(o, c.s, pad(c.txt))
-		if w.newLine {
-			fmt.Fprint(o, "\n")
-		}
-	}
 }
