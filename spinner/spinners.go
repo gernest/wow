@@ -79,6 +79,8 @@ const (
 	Triangle
 )
 
+var All = []Name{Circle, Dots9, Dots10, BoxBounce2, Triangle, Toggle12, Dots5, Dots7, Dots, Pong, Clock, Moon, Dqpb, Arrow, BouncingBall, Toggle11, Dots4, Dots6, Squish, Toggle8, Balloon, Balloon2, Hamburger, Toggle13, BouncingBar, Monkey, SimpleDots, Flip, Toggle5, Arrow3, Dots2, Dots8, BoxBounce, CircleQuarters, Toggle4, Smiley, Dots11, Line2, GrowHorizontal, Hearts, Dots12, Star, CircleHalves, SimpleDotsScrolling, SquareCorners, Bounce, Toggle6, Toggle2, Line, Pipe, Runner, Noise, Toggle, Toggle3, Toggle7, Toggle10, Arrow2, Star2, Arc, Toggle9, Earth, Shark, Dots3, GrowVertical}
+
 func (s Name) String() string {
 	switch s {
 	case Arc:

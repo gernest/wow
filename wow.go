@@ -24,7 +24,7 @@ func Render(o io.Writer, s spinner.Spinner, txt string) error {
 	return nil
 }
 
-const erase = "\033[1K\r"
+const erase = "\033[2K\r"
 
 type component struct {
 	s   spinner.Spinner
@@ -32,15 +32,27 @@ type component struct {
 }
 
 type Wow struct {
-	c []component
+	c       []component
+	newLine bool
+}
+
+func New(newLine bool) *Wow {
+	return &Wow{newLine: newLine}
 }
 
 func (w *Wow) AddLine(s spinner.Spinner, txt string) {
 	w.c = append(w.c, component{s: s, txt: txt})
 }
 
+func pad(txt string) string {
+	return "  " + txt
+}
+
 func (w *Wow) RenderTo(o io.Writer) {
 	for _, c := range w.c {
-		Render(o, c.s, c.txt)
+		Render(o, c.s, pad(c.txt))
+		if w.newLine {
+			fmt.Fprint(o, "\n")
+		}
 	}
 }

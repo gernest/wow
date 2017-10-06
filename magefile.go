@@ -80,6 +80,17 @@ func helpers() template.FuncMap {
 				return fmt.Sprintf("[]string{ %v }", o)
 			}
 		},
+		"all": func(a map[string]interface{}) string {
+			o := ""
+			for k := range a {
+				if o == "" {
+					o += fmt.Sprintf("%s", strings.Title(k))
+				} else {
+					o += fmt.Sprintf(",%s", strings.Title(k))
+				}
+			}
+			return fmt.Sprintf("[]Name{%s}", o)
+		},
 	}
 }
 
@@ -103,6 +114,7 @@ const(
 	{{- $k|title}}
 	{{end}}
 )
+var All = {{all .}}
 
 func (s Name)String()string{
 	switch s{

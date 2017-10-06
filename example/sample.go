@@ -9,6 +9,10 @@ import (
 )
 
 func main() {
-	s := spinner.GetSpinner(spinner.Arrow)
-	wow.Render(os.Stdout, s, " some fish")
+	w := &wow.Wow{}
+	for _, v := range spinner.All {
+		s := spinner.GetSpinner(v)
+		w.AddLine(s, s.Name.String())
+	}
+	w.RenderTo(os.Stdout)
 }
