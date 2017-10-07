@@ -17,6 +17,8 @@ import (
 	"github.com/magefile/mage/mg"
 )
 
+// Spinners generates easy/accessible Go types for spinners from
+// cli-spinners/spinners.json.
 func Spinners() error {
 	mg.Deps(func() error {
 		pkg := "spinner"
@@ -145,6 +147,18 @@ func GetSpinner( name Name)Spinner{
 }
 `
 
+// Update updates cli-spinners to get latest changes to the spinners.json file.
 func Update() error {
 	return sh.Run("git", "submodule", "update", "--remote", "cli-spinners")
+}
+
+//Setup prepares the project for local development.
+//
+//  This runs git submodule init && git submodule update
+func Setup() error {
+	err := sh.Run("git", "submodule", "init")
+	if err != nil {
+		return err
+	}
+	return sh.Run("git", "submodule", "update")
 }
