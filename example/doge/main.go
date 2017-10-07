@@ -9,11 +9,11 @@ import (
 )
 
 func main() {
-	w := wow.New(os.Stdout, spinner.GetSpinner(spinner.Dots), "Such Spins")
+	w := wow.New(os.Stdout, spinner.Get(spinner.Dots), "Such Spins")
 	w.Start()
 	time.Sleep(2 * time.Second)
 	w.Text = "Very emojis"
-	w.Spinner = spinner.GetSpinner(spinner.Hearts)
+	w.Spinner = spinner.Get(spinner.Hearts)
 	time.Sleep(2 * time.Second)
 	w.PersisWitht(spinner.Spinner{
 		Frames: []string{"👍"},

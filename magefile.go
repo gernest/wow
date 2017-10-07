@@ -131,7 +131,7 @@ func (s Name)String()string{
 	}
 }
 
-func GetSpinner( name Name)Spinner{
+func Get( name Name)Spinner{
 	switch name{
 		{{- range $k,$v:=.}}
 	case {{$k|title}} :

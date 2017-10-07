@@ -81,7 +81,7 @@ const (
 	Weather
 )
 
-var All = []Name{Dots6, Dots7, Toggle, Christmas, Dots, Dots2, GrowVertical, Arc, Toggle6, Arrow3, Line2, Squish, Toggle9, Moon, Toggle12, Smiley, Toggle3, Toggle7, BouncingBall, Monkey, Dqpb, Shark, Weather, Clock, Earth, Dots3, Dots5, Bounce, Triangle, Toggle2, Arrow2, Dots4, Star2, BoxBounce, Circle, Toggle13, BouncingBar, Balloon2, SquareCorners, CircleQuarters, Runner, Dots10, GrowHorizontal, BoxBounce2, Toggle8, Dots8, Line, Star, Pong, Flip, Balloon, Toggle4, Dots11, Dots12, Toggle10, Hearts, Dots9, SimpleDotsScrolling, Hamburger, Toggle5, Toggle11, Arrow, Pipe, SimpleDots, Noise, CircleHalves}
+var All = []Name{Dots4, SimpleDotsScrolling, Star2, Flip, Clock, Moon, Bounce, BouncingBall, GrowVertical, Balloon2, Circle, Dots5, Toggle9, Runner, Dots12, Line, Balloon, SquareCorners, Toggle2, Star, Toggle, Toggle5, Hearts, BoxBounce2, Toggle10, Pong, Smiley, Dots6, Dots7, Dots8, Dots10, BoxBounce, CircleQuarters, Toggle12, Dots3, Line2, CircleHalves, Toggle8, Arrow, Monkey, Earth, GrowHorizontal, Toggle7, BouncingBar, Weather, Hamburger, Toggle4, Christmas, Dots2, Dots11, Pipe, Noise, Arrow3, Dots, Dots9, Toggle11, Toggle13, Shark, Dqpb, SimpleDots, Squish, Toggle6, Triangle, Arc, Toggle3, Arrow2}
 
 func (s Name) String() string {
 	switch s {
@@ -222,7 +222,7 @@ func (s Name) String() string {
 	}
 }
 
-func GetSpinner(name Name) Spinner {
+func Get(name Name) Spinner {
 	switch name {
 	case Arc:
 		return Spinner{

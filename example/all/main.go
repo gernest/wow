@@ -11,7 +11,7 @@ import (
 
 func main() {
 	for _, v := range spinner.All {
-		w := wow.New(os.Stdout, spinner.GetSpinner(v), " "+v.String())
+		w := wow.New(os.Stdout, spinner.Get(v), " "+v.String())
 		w.Start()
 		time.Sleep(2)
 		w.Persist()
