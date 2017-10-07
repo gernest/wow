@@ -59,3 +59,17 @@ func (w *Wow) Stop() {
 		w.done()
 	}
 }
+
+func (w *Wow) Persist() {
+	w.Stop()
+	at := len(w.Spinner.Frames) - 1
+	fmt.Fprint(w.Out, erase)
+	fmt.Fprint(w.Out, w.Spinner.Frames[at])
+	fmt.Fprintf(w.Out, " %s", w.Text)
+}
+func (w *Wow) PersisWitht(s spinner.Spinner, text string) {
+	w.Stop()
+	fmt.Fprint(w.Out, erase)
+	fmt.Fprint(w.Out, s.Frames[0])
+	fmt.Fprintf(w.Out, " %s", text)
+}

@@ -1,18 +1,20 @@
 package main
 
 import (
+	"fmt"
 	"os"
+	"time"
 
 	"github.com/gernest/wow"
-
 	"github.com/gernest/wow/spinner"
 )
 
 func main() {
-	w := &wow.Wow{}
 	for _, v := range spinner.All {
-		s := spinner.GetSpinner(v)
-		w.AddLine(s, s.Name.String())
+		w := wow.New(os.Stdout, spinner.GetSpinner(v), " "+v.String())
+		w.Start()
+		time.Sleep(2)
+		w.Persist()
+		fmt.Print("\n")
 	}
-	w.RenderTo(os.Stdout)
 }
