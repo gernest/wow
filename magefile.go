@@ -27,7 +27,7 @@ func Spinners() error {
 		}
 		return nil
 	})
-	b, err := ioutil.ReadFile("spinners.json")
+	b, err := ioutil.ReadFile("cli-spinners/spinners.json")
 	if err != nil {
 		return err
 	}

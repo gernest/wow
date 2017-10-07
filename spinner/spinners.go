@@ -24,6 +24,7 @@ const (
 	BouncingBar
 	BoxBounce
 	BoxBounce2
+	Christmas
 	Circle
 	CircleHalves
 	CircleQuarters
@@ -77,9 +78,10 @@ const (
 	Toggle8
 	Toggle9
 	Triangle
+	Weather
 )
 
-var All = []Name{Circle, Dots9, Dots10, BoxBounce2, Triangle, Toggle12, Dots5, Dots7, Dots, Pong, Clock, Moon, Dqpb, Arrow, BouncingBall, Toggle11, Dots4, Dots6, Squish, Toggle8, Balloon, Balloon2, Hamburger, Toggle13, BouncingBar, Monkey, SimpleDots, Flip, Toggle5, Arrow3, Dots2, Dots8, BoxBounce, CircleQuarters, Toggle4, Smiley, Dots11, Line2, GrowHorizontal, Hearts, Dots12, Star, CircleHalves, SimpleDotsScrolling, SquareCorners, Bounce, Toggle6, Toggle2, Line, Pipe, Runner, Noise, Toggle, Toggle3, Toggle7, Toggle10, Arrow2, Star2, Arc, Toggle9, Earth, Shark, Dots3, GrowVertical}
+var All = []Name{Dots6, Dots7, Toggle, Christmas, Dots, Dots2, GrowVertical, Arc, Toggle6, Arrow3, Line2, Squish, Toggle9, Moon, Toggle12, Smiley, Toggle3, Toggle7, BouncingBall, Monkey, Dqpb, Shark, Weather, Clock, Earth, Dots3, Dots5, Bounce, Triangle, Toggle2, Arrow2, Dots4, Star2, BoxBounce, Circle, Toggle13, BouncingBar, Balloon2, SquareCorners, CircleQuarters, Runner, Dots10, GrowHorizontal, BoxBounce2, Toggle8, Dots8, Line, Star, Pong, Flip, Balloon, Toggle4, Dots11, Dots12, Toggle10, Hearts, Dots9, SimpleDotsScrolling, Hamburger, Toggle5, Toggle11, Arrow, Pipe, SimpleDots, Noise, CircleHalves}
 
 func (s Name) String() string {
 	switch s {
@@ -105,6 +107,8 @@ func (s Name) String() string {
 		return "boxBounce"
 	case BoxBounce2:
 		return "boxBounce2"
+	case Christmas:
+		return "christmas"
 	case Circle:
 		return "circle"
 	case CircleHalves:
@@ -211,6 +215,8 @@ func (s Name) String() string {
 		return "toggle9"
 	case Triangle:
 		return "triangle"
+	case Weather:
+		return "weather"
 	default:
 		return ""
 	}
@@ -270,7 +276,7 @@ func GetSpinner(name Name) Spinner {
 		return Spinner{
 			Name:     BouncingBar,
 			Interval: 80,
-			Frames:   []string{`[    ]`, `[   =]`, `[  ==]`, `[ ===]`, `[====]`, `[=== ]`, `[==  ]`, `[=   ]`},
+			Frames:   []string{`[    ]`, `[=   ]`, `[==  ]`, `[=== ]`, `[ ===]`, `[  ==]`, `[   =]`, `[    ]`, `[   =]`, `[  ==]`, `[ ===]`, `[====]`, `[=== ]`, `[==  ]`, `[=   ]`},
 		}
 	case BoxBounce:
 		return Spinner{
@@ -283,6 +289,12 @@ func GetSpinner(name Name) Spinner {
 			Name:     BoxBounce2,
 			Interval: 100,
 			Frames:   []string{`▌`, `▀`, `▐`, `▄`},
+		}
+	case Christmas:
+		return Spinner{
+			Name:     Christmas,
+			Interval: 400,
+			Frames:   []string{`🌲`, `🎄`},
 		}
 	case Circle:
 		return Spinner{
@@ -601,6 +613,12 @@ func GetSpinner(name Name) Spinner {
 			Name:     Triangle,
 			Interval: 50,
 			Frames:   []string{`◢`, `◣`, `◤`, `◥`},
+		}
+	case Weather:
+		return Spinner{
+			Name:     Weather,
+			Interval: 100,
+			Frames:   []string{`☀️ `, `☀️ `, `☀️ `, `🌤 `, `⛅️ `, `🌥 `, `☁️ `, `🌧 `, `🌨 `, `🌧 `, `🌨 `, `🌧 `, `🌨 `, `⛈ `, `🌨 `, `🌧 `, `🌨 `, `☁️ `, `🌥 `, `⛅️ `, `🌤 `, `☀️ `, `☀️ `},
 		}
 	default:
 		return Spinner{}
