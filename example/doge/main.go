@@ -16,7 +16,7 @@ func main() {
 	w.Spinner = spinner.GetSpinner(spinner.Hearts)
 	time.Sleep(2 * time.Second)
 	w.PersisWitht(spinner.Spinner{
-		Frames: []string{"🦄"},
+		Frames: []string{"👍"},
 	}, " Wow!")
 
 }
