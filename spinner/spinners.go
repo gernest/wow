@@ -1,3 +1,4 @@
+//DO NOT EDIT : this file was automatically generated.
 package spinner
 
 // Spinner defines a spinner widget
@@ -81,7 +82,7 @@ const (
 	Weather
 )
 
-var All = []Name{Dots4, SimpleDotsScrolling, Star2, Flip, Clock, Moon, Bounce, BouncingBall, GrowVertical, Balloon2, Circle, Dots5, Toggle9, Runner, Dots12, Line, Balloon, SquareCorners, Toggle2, Star, Toggle, Toggle5, Hearts, BoxBounce2, Toggle10, Pong, Smiley, Dots6, Dots7, Dots8, Dots10, BoxBounce, CircleQuarters, Toggle12, Dots3, Line2, CircleHalves, Toggle8, Arrow, Monkey, Earth, GrowHorizontal, Toggle7, BouncingBar, Weather, Hamburger, Toggle4, Christmas, Dots2, Dots11, Pipe, Noise, Arrow3, Dots, Dots9, Toggle11, Toggle13, Shark, Dqpb, SimpleDots, Squish, Toggle6, Triangle, Arc, Toggle3, Arrow2}
+var All = []Name{Dots2, Hamburger, Arrow, Clock, Toggle6, Toggle13, Dqpb, Dots7, Balloon, Bounce, BoxBounce2, GrowVertical, BoxBounce, Toggle7, Toggle12, Toggle, Toggle5, Toggle8, Dots5, Toggle9, Dots, CircleQuarters, Toggle11, Christmas, Dots6, Squish, Toggle3, Toggle4, Arc, Arrow3, Moon, Runner, Dots4, Dots8, SimpleDotsScrolling, GrowHorizontal, Pong, CircleHalves, Toggle10, Smiley, Monkey, Dots11, Earth, Shark, Weather, Pipe, Star, BouncingBall, Arrow2, Hearts, SimpleDots, Star2, Balloon2, Noise, Dots3, Triangle, BouncingBar, Dots9, Line, SquareCorners, Toggle2, Dots12, Line2, Flip, Circle, Dots10}
 
 func (s Name) String() string {
 	switch s {

@@ -98,7 +98,7 @@ func helpers() template.FuncMap {
 	}
 }
 
-const spinnersTpl = `
+const spinnersTpl = `//DO NOT EDIT : this file was automatically generated.
 package spinner
 
 // Spinner defines a spinner widget
