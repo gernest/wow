@@ -1,5 +1,5 @@
 
-##wow
+## wow
 
 Beautiful spinners for Go commandline apps
 
