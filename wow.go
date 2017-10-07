@@ -11,11 +11,6 @@ import (
 
 const erase = "\033[2K\r"
 
-type component struct {
-	s   spinner.Spinner
-	txt string
-}
-
 type Wow struct {
 	Text    string
 	Spinner spinner.Spinner
