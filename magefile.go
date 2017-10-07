@@ -12,6 +12,8 @@ import (
 	"strings"
 	"text/template"
 
+	"github.com/magefile/mage/sh"
+
 	"github.com/magefile/mage/mg"
 )
 
@@ -142,3 +144,7 @@ func GetSpinner( name Name)Spinner{
 	}
 }
 `
+
+func Update() error {
+	return sh.Run("git", "submodule", "update", "--remote", "cli-spinners")
+}
