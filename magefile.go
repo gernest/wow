@@ -9,6 +9,7 @@ import (
 	"go/format"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"strings"
 	"text/template"
 
@@ -20,8 +21,8 @@ import (
 // Spinners generates easy/accessible Go types for spinners from
 // cli-spinners/spinners.json.
 func Spinners() error {
+	pkg := "spin"
 	mg.Deps(func() error {
-		pkg := "spinner"
 		_, err := os.Stat(pkg)
 		if err != nil {
 			if os.IsNotExist(err) {
@@ -53,7 +54,7 @@ func Spinners() error {
 	if err != nil {
 		return err
 	}
-	return ioutil.WriteFile("spinner/spinners.go", bo, 0600)
+	return ioutil.WriteFile(filepath.Join(pkg, "spinners.go"), bo, 0600)
 }
 
 func helpers() template.FuncMap {
@@ -99,7 +100,7 @@ func helpers() template.FuncMap {
 }
 
 const spinnersTpl = `//DO NOT EDIT : this file was automatically generated.
-package spinner
+package spin
 
 // Spinner defines a spinner widget
 type Spinner struct{

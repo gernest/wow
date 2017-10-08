@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gernest/wow/spinner"
+	"github.com/gernest/wow/spin"
 )
 
 const erase = "\033[2K\r"
@@ -15,7 +15,7 @@ const erase = "\033[2K\r"
 // Wow writes beautiful spinners on the terminal.
 type Wow struct {
 	txt     string
-	s       spinner.Spinner
+	s       spin.Spinner
 	out     io.Writer
 	running bool
 	done    func()
@@ -23,7 +23,7 @@ type Wow struct {
 }
 
 // New creates a new wow instance ready to start spinning.
-func New(o io.Writer, s spinner.Spinner, text string) *Wow {
+func New(o io.Writer, s spin.Spinner, text string) *Wow {
 	return &Wow{out: o, s: s, txt: text}
 }
 
@@ -62,7 +62,7 @@ func (w *Wow) Stop() {
 }
 
 // Spinner sets s to the current spinner
-func (w *Wow) Spinner(s spinner.Spinner) *Wow {
+func (w *Wow) Spinner(s spin.Spinner) *Wow {
 	w.mu.Lock()
 	w.s = s
 	w.mu.Unlock()
@@ -88,7 +88,7 @@ func (w *Wow) Persist() {
 
 // PersistWith writes the last frame of s together with text with a new line
 // added to make it stick.
-func (w *Wow) PersistWith(s spinner.Spinner, text string) {
+func (w *Wow) PersistWith(s spin.Spinner, text string) {
 	w.Stop()
 	var a string
 	if len(s.Frames) > 0 {
