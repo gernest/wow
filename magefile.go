@@ -167,10 +167,10 @@ func Setup() error {
 }
 
 func SpinTable() error {
-	fmt.Println("  Name  | what it looks like ")
-	fmt.Println("------------------------------")
+	fmt.Println("  Name  | What it looks like ")
+	fmt.Println("--------|---------------------")
 	for _, v := range spin.All {
-		fmt.Printf(" %v | ![%s](static/%s.gif)\n", strings.Title(v.String()), v, v)
+		fmt.Printf(" `%v` | ![%s](static/%s.gif)\n", strings.Title(v.String()), v, v)
 	}
 	return nil
 }
