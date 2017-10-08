@@ -26,10 +26,7 @@ func main() {
 	w.Start()
 	time.Sleep(2 * time.Second)
 	w.Text("Very emojis").Spinner(spinner.Get(spinner.Hearts))
-	time.Sleep(2 * time.Second)
-	w.PersisWith(spinner.Spinner{
-		Frames: []string{"👍"},
-	}, " Wow!")
-
+    time.Sleep(2 * time.Second)
+    w.PersistWith(spinner.Spinner{Frames: []string{"👍"}}, " Wow!")
 }
 ```

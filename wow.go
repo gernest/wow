@@ -86,9 +86,9 @@ func (w *Wow) Persist() {
 	fmt.Fprint(w.out, txt)
 }
 
-// PersisWith writes the last frame of s together with text with a new line
+// PersistWith writes the last frame of s together with text with a new line
 // added to make it stick.
-func (w *Wow) PersisWith(s spinner.Spinner, text string) {
+func (w *Wow) PersistWith(s spinner.Spinner, text string) {
 	w.Stop()
 	var a string
 	if len(s.Frames) > 0 {
