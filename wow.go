@@ -44,6 +44,7 @@ func (w *Wow) Start() {
 			for {
 				select {
 				case <-ctx.Done():
+					t.Stop()
 					break
 				case <-t.C:
 					if at >= len(w.s.Frames) {
