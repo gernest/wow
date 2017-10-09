@@ -47,10 +47,7 @@ func (w *Wow) Start() {
 					t.Stop()
 					break
 				case <-t.C:
-					if at >= len(w.s.Frames) {
-						at = 0
-					}
-					txt := erase + w.s.Frames[at] + w.txt
+					txt := erase + w.s.Frames[at%len(w.s.Frames)] + w.txt
 					if w.isTerminal {
 						fmt.Fprint(w.out, txt)
 					}
