@@ -71,9 +71,9 @@ func (w *Wow) Stop() {
 
 // Spinner sets s to the current spinner
 func (w *Wow) Spinner(s spin.Spinner) *Wow {
-	w.mu.Lock()
+	w.Stop()
 	w.s = s
-	w.mu.Unlock()
+	w.Start()
 	return w
 }
 
