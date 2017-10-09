@@ -59,6 +59,35 @@ func Spinners() error {
 	return ioutil.WriteFile(filepath.Join(pkg, "spinners.go"), bo, 0600)
 }
 
+// ExampleAll generates example executable file to demo all spinners
+func ExampleAll() error {
+	b, err := ioutil.ReadFile("cli-spinners/spinners.json")
+	if err != nil {
+		return err
+	}
+	o := make(map[string]interface{})
+	err = json.Unmarshal(b, &o)
+	if err != nil {
+		return err
+	}
+
+	// Generate example/all/main.go
+	tpl, err := template.New("example-all").Funcs(helpers()).Parse(exampleAllTpl)
+	if err != nil {
+		return err
+	}
+	var buf bytes.Buffer
+	err = tpl.Execute(&buf, o)
+	if err != nil {
+		return err
+	}
+	bo, err := format.Source(buf.Bytes())
+	if err != nil {
+		return err
+	}
+	return ioutil.WriteFile("example/all/main.go", bo, 0600)
+}
+
 func helpers() template.FuncMap {
 	return template.FuncMap{
 		"title": strings.Title,
@@ -98,6 +127,17 @@ func helpers() template.FuncMap {
 			}
 			return fmt.Sprintf("[]Name{%s}", o)
 		},
+		"allwithpkg": func(a map[string]interface{}) string {
+			o := ""
+			for k := range a {
+				if o == "" {
+					o += fmt.Sprintf("spin.%s", strings.Title(k))
+				} else {
+					o += fmt.Sprintf(",spin.%s", strings.Title(k))
+				}
+			}
+			return fmt.Sprintf("[]spin.Name{%s}", o)
+		},
 	}
 }
 
@@ -106,7 +146,7 @@ package spin
 
 // Spinner defines a spinner widget
 type Spinner struct{
-	Name Name 
+	Name Name
 	Interval int
 	Frames []string
 }
@@ -121,7 +161,6 @@ const(
 	{{- $k|title}}
 	{{end}}
 )
-var All = {{all .}}
 
 func (s Name)String()string{
 	switch s{
@@ -148,6 +187,30 @@ func Get( name Name)Spinner{
 		return Spinner{}
 	}
 }
+`
+
+const exampleAllTpl = `//DO NOT EDIT : this file was automatically generated.
+package main
+
+import (
+	"os"
+	"time"
+
+	"github.com/gernest/wow"
+	"github.com/gernest/wow/spin"
+)
+
+var all = {{allwithpkg .}}
+
+func main() {
+	for _, v := range all {
+		w := wow.New(os.Stdout, spin.Get(v), " "+v.String())
+		w.Start()
+		time.Sleep(2)
+		w.Persist()
+	}
+}
+
 `
 
 // Update updates cli-spinners to get latest changes to the spinners.json file.
