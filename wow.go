@@ -4,27 +4,31 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"os"
 	"sync"
 	"time"
 
 	"github.com/gernest/wow/spin"
+	"golang.org/x/crypto/ssh/terminal"
 )
 
 const erase = "\033[2K\r"
 
 // Wow writes beautiful spinners on the terminal.
 type Wow struct {
-	txt     string
-	s       spin.Spinner
-	out     io.Writer
-	running bool
-	done    func()
-	mu      sync.RWMutex
+	txt        string
+	s          spin.Spinner
+	out        io.Writer
+	running    bool
+	done       func()
+	mu         sync.RWMutex
+	isTerminal bool
 }
 
 // New creates a new wow instance ready to start spinning.
 func New(o io.Writer, s spin.Spinner, text string) *Wow {
-	return &Wow{out: o, s: s, txt: text}
+	isTerminal := terminal.IsTerminal(int(os.Stdout.Fd()))
+	return &Wow{out: o, s: s, txt: text, isTerminal: isTerminal}
 }
 
 // Start starts the spinner. The frames are written based on the spinner
@@ -46,7 +50,9 @@ func (w *Wow) Start() {
 						at = 0
 					}
 					txt := erase + w.s.Frames[at] + w.txt
-					fmt.Fprint(w.out, txt)
+					if w.isTerminal {
+						fmt.Fprint(w.out, txt)
+					}
 					at++
 				}
 			}
@@ -83,7 +89,9 @@ func (w *Wow) Persist() {
 	w.Stop()
 	at := len(w.s.Frames) - 1
 	txt := erase + w.s.Frames[at] + w.txt + "\n"
-	fmt.Fprint(w.out, txt)
+	if w.isTerminal {
+		fmt.Fprint(w.out, txt)
+	}
 }
 
 // PersistWith writes the last frame of s together with text with a new line
@@ -95,5 +103,7 @@ func (w *Wow) PersistWith(s spin.Spinner, text string) {
 		a = s.Frames[len(s.Frames)-1]
 	}
 	txt := erase + a + text + "\n"
-	fmt.Fprint(w.out, txt)
+	if w.isTerminal {
+		fmt.Fprint(w.out, txt)
+	}
 }
