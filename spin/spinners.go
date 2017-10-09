@@ -82,8 +82,6 @@ const (
 	Weather
 )
 
-var All = []Name{Star2, GrowHorizontal, Squish, Toggle12, Smiley, Hearts, Dots3, Dots11, Balloon, Clock, Dots4, SquareCorners, CircleHalves, Star, Arc, Toggle13, BoxBounce, Line2, Pipe, Triangle, Shark, Line, Arrow, Earth, Dots5, Toggle11, CircleQuarters, Toggle9, Dots9, Bounce, Toggle2, Toggle7, Arrow3, Moon, Dots6, Christmas, Dots10, Hamburger, BoxBounce2, BouncingBar, Flip, Dots8, Dots12, Noise, Toggle3, Toggle6, Runner, Dqpb, Dots, Toggle4, Monkey, Dots7, SimpleDots, GrowVertical, Circle, Toggle, Toggle5, Arrow2, Dots2, Toggle8, Toggle10, BouncingBall, SimpleDotsScrolling, Pong, Weather, Balloon2}
-
 func (s Name) String() string {
 	switch s {
 	case Arc:
