@@ -2,7 +2,7 @@ package wow
 
 import "runtime"
 
-//log symbols
+// LogSymbol is a log severity level
 type LogSymbol uint
 
 // common log symbos
