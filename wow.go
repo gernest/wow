@@ -66,6 +66,7 @@ func (w *Wow) Stop() {
 	if w.done != nil {
 		w.done()
 	}
+	w.running = false
 }
 
 // Spinner sets s to the current spinner
