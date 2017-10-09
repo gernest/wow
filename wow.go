@@ -74,6 +74,8 @@ func (w *Wow) Spinner(s spin.Spinner) *Wow {
 	w.mu.Unlock()
 	return w
 }
+
+// Text adds text to the current spinner
 func (w *Wow) Text(txt string) *Wow {
 	w.mu.Lock()
 	w.txt = txt
