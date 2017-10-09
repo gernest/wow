@@ -106,7 +106,7 @@ package spin
 
 // Spinner defines a spinner widget
 type Spinner struct{
-	Name Name 
+	Name Name
 	Interval int
 	Frames []string
 }
