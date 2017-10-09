@@ -13,8 +13,6 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/gernest/wow/spin"
-
 	"github.com/magefile/mage/sh"
 
 	"github.com/magefile/mage/mg"
@@ -227,13 +225,4 @@ func Setup() error {
 		return err
 	}
 	return sh.Run("git", "submodule", "update")
-}
-
-func SpinTable() error {
-	fmt.Println("  Name  | What it looks like ")
-	fmt.Println("--------|---------------------")
-	for _, v := range spin.All {
-		fmt.Printf(" `%v` | ![%s](static/%s.gif)\n", strings.Title(v.String()), v, v)
-	}
-	return nil
 }
