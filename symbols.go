@@ -14,28 +14,16 @@ const (
 )
 
 func (s LogSymbol) String() string {
-	if runtime.GOOS == "windows" {
-		switch s {
-		case INFO:
-			return "ℹ"
-		case SUCCESS:
-			return "✔"
-		case WARNING:
-			return "⚠"
-		case ERROR:
-			return "✖"
-		}
-	} else {
-		switch s {
-		case INFO:
-			return "i"
-		case SUCCESS:
-			return "v"
-		case WARNING:
-			return "!!"
-		case ERROR:
-			return "x"
-		}
+	switch s {
+	case INFO:
+		return "ℹ"
+	case SUCCESS:
+		return "✔"
+	case WARNING:
+		return "⚠"
+	case ERROR:
+		return "✖"
+	default:
+		return ""
 	}
-	return ""
 }
