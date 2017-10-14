@@ -44,12 +44,10 @@ func (w *Wow) Start() {
 			for {
 				select {
 				case <-ctx.Done():
+					t.Stop()
 					break
 				case <-t.C:
-					if at >= len(w.s.Frames) {
-						at = 0
-					}
-					txt := erase + w.s.Frames[at] + w.txt
+					txt := erase + w.s.Frames[at%len(w.s.Frames)] + w.txt
 					if w.isTerminal {
 						fmt.Fprint(w.out, txt)
 					}
@@ -65,13 +63,14 @@ func (w *Wow) Stop() {
 	if w.done != nil {
 		w.done()
 	}
+	w.running = false
 }
 
 // Spinner sets s to the current spinner
 func (w *Wow) Spinner(s spin.Spinner) *Wow {
-	w.mu.Lock()
+	w.Stop()
 	w.s = s
-	w.mu.Unlock()
+	w.Start()
 	return w
 }
 

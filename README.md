@@ -1,5 +1,6 @@
 
 ## wow
+[![GoDoc](https://godoc.org/github.com/gernest/wow?status.svg)](https://godoc.org/github.com/gernest/wow)
 
 Beautiful spinners for Go commandline apps
 

@@ -14,7 +14,7 @@ const (
 )
 
 func (s LogSymbol) String() string {
-	if runtime.GOOS == "windows" {
+	if runtime.GOOS != "windows" {
 		switch s {
 		case INFO:
 			return "ℹ"
