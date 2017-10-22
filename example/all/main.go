@@ -13,7 +13,7 @@ var all = []spin.Name{spin.Toggle6, spin.BouncingBall, spin.Balloon, spin.Toggle
 
 func main() {
 	for _, v := range all {
-		w := wow.New(os.Stdout, spin.Get(v), " "+v.String())
+		w := wow.New(os.Stdout, spin.Get(v), " "+v.String(), wow.ForceOutput)
 		w.Start()
 		time.Sleep(2)
 		w.Persist()

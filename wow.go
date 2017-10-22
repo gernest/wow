@@ -26,9 +26,16 @@ type Wow struct {
 }
 
 // New creates a new wow instance ready to start spinning.
-func New(o io.Writer, s spin.Spinner, text string) *Wow {
+func New(o io.Writer, s spin.Spinner, text string, options ...func(*Wow)) *Wow {
 	isTerminal := terminal.IsTerminal(int(os.Stdout.Fd()))
-	return &Wow{out: o, s: s, txt: text, isTerminal: isTerminal}
+
+	wow := Wow{out: o, s: s, txt: text, isTerminal: isTerminal}
+
+	for _, option := range options {
+		option(&wow)
+	}
+	
+	return &wow
 }
 
 // Start starts the spinner. The frames are written based on the spinner
@@ -107,4 +114,9 @@ func (w *Wow) PersistWith(s spin.Spinner, text string) {
 	if w.isTerminal {
 		fmt.Fprint(w.out, txt)
 	}
+}
+
+// ForceOutput forces all output even if not not outputting directly to a terminal
+func ForceOutput(w *Wow) {
+	w.isTerminal = true
 }
