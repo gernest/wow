@@ -22,19 +22,19 @@ type Wow struct {
 	running    bool
 	done       func()
 	mu         sync.RWMutex
-	isTerminal bool
+	IsTerminal bool
 }
 
 // New creates a new wow instance ready to start spinning.
 func New(o io.Writer, s spin.Spinner, text string, options ...func(*Wow)) *Wow {
 	isTerminal := terminal.IsTerminal(int(os.Stdout.Fd()))
 
-	wow := Wow{out: o, s: s, txt: text, isTerminal: isTerminal}
+	wow := Wow{out: o, s: s, txt: text, IsTerminal: isTerminal}
 
 	for _, option := range options {
 		option(&wow)
 	}
-	
+
 	return &wow
 }
 
@@ -55,7 +55,7 @@ func (w *Wow) Start() {
 					break
 				case <-t.C:
 					txt := erase + w.s.Frames[at%len(w.s.Frames)] + w.txt
-					if w.isTerminal {
+					if w.IsTerminal {
 						fmt.Fprint(w.out, txt)
 					}
 					at++
@@ -97,7 +97,7 @@ func (w *Wow) Persist() {
 	w.Stop()
 	at := len(w.s.Frames) - 1
 	txt := erase + w.s.Frames[at] + w.txt + "\n"
-	if w.isTerminal {
+	if w.IsTerminal {
 		fmt.Fprint(w.out, txt)
 	}
 }
@@ -111,12 +111,12 @@ func (w *Wow) PersistWith(s spin.Spinner, text string) {
 		a = s.Frames[len(s.Frames)-1]
 	}
 	txt := erase + a + text + "\n"
-	if w.isTerminal {
+	if w.IsTerminal {
 		fmt.Fprint(w.out, txt)
 	}
 }
 
 // ForceOutput forces all output even if not not outputting directly to a terminal
 func ForceOutput(w *Wow) {
-	w.isTerminal = true
+	w.IsTerminal = true
 }
