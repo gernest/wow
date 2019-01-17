@@ -39,30 +39,32 @@ func New(o io.Writer, s spin.Spinner, text string, options ...func(*Wow)) *Wow {
 	return &wow
 }
 
+func (w *Wow) run(ctx context.Context) {
+	t := time.NewTicker(time.Duration(w.s.Interval) * time.Millisecond)
+	at := 0
+	for {
+		select {
+		case <-ctx.Done():
+			t.Stop()
+			return
+		case <-t.C:
+			txt := erase + w.s.Frames[at%len(w.s.Frames)] + w.txt
+			if w.IsTerminal {
+				fmt.Fprint(w.out, txt)
+			}
+			at++
+		}
+	}
+}
+
 // Start starts the spinner. The frames are written based on the spinner
 // interval.
 func (w *Wow) Start() {
 	if !w.running {
 		ctx, done := context.WithCancel(context.Background())
-		t := time.NewTicker(time.Duration(w.s.Interval) * time.Millisecond)
 		w.done = done
 		w.running = true
-		go func() {
-			at := 0
-			for {
-				select {
-				case <-ctx.Done():
-					t.Stop()
-					break
-				case <-t.C:
-					txt := erase + w.s.Frames[at%len(w.s.Frames)] + w.txt
-					if w.IsTerminal {
-						fmt.Fprint(w.out, txt)
-					}
-					at++
-				}
-			}
-		}()
+		go w.run(ctx)
 	}
 }
 
