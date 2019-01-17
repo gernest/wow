@@ -1,0 +1,1 @@
+git submodule update --remote cli-spinners

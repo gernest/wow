@@ -45,16 +45,19 @@ const (
 	Dqpb
 	Earth
 	Flip
+	Grenade
 	GrowHorizontal
 	GrowVertical
 	Hamburger
 	Hearts
+	Layer
 	Line
 	Line2
 	Monkey
 	Moon
 	Noise
 	Pipe
+	Point
 	Pong
 	Runner
 	Shark
@@ -146,6 +149,8 @@ func (s Name) String() string {
 		return "earth"
 	case Flip:
 		return "flip"
+	case Grenade:
+		return "grenade"
 	case GrowHorizontal:
 		return "growHorizontal"
 	case GrowVertical:
@@ -154,6 +159,8 @@ func (s Name) String() string {
 		return "hamburger"
 	case Hearts:
 		return "hearts"
+	case Layer:
+		return "layer"
 	case Line:
 		return "line"
 	case Line2:
@@ -166,6 +173,8 @@ func (s Name) String() string {
 		return "noise"
 	case Pipe:
 		return "pipe"
+	case Point:
+		return "point"
 	case Pong:
 		return "pong"
 	case Runner:
@@ -317,7 +326,7 @@ func Get(name Name) Spinner {
 		return Spinner{
 			Name:     Clock,
 			Interval: 100,
-			Frames:   []string{`🕐 `, `🕑 `, `🕒 `, `🕓 `, `🕔 `, `🕕 `, `🕖 `, `🕗 `, `🕘 `, `🕙 `, `🕚 `},
+			Frames:   []string{`🕛 `, `🕐 `, `🕑 `, `🕒 `, `🕓 `, `🕔 `, `🕕 `, `🕖 `, `🕗 `, `🕘 `, `🕙 `, `🕚 `},
 		}
 	case Dots:
 		return Spinner{
@@ -409,6 +418,12 @@ func Get(name Name) Spinner {
 			Interval: 70,
 			Frames:   []string{`_`, `_`, `_`, `-`, "`", "`", `'`, `´`, `-`, `_`, `_`, `_`},
 		}
+	case Grenade:
+		return Spinner{
+			Name:     Grenade,
+			Interval: 80,
+			Frames:   []string{`،   `, `′   `, ` ´ `, ` ‾ `, `  ⸌`, `  ⸊`, `  |`, `  ⁎`, `  ⁕`, ` ෴ `, `  ⁓`, `   `, `   `, `   `},
+		}
 	case GrowHorizontal:
 		return Spinner{
 			Name:     GrowHorizontal,
@@ -432,6 +447,12 @@ func Get(name Name) Spinner {
 			Name:     Hearts,
 			Interval: 100,
 			Frames:   []string{`💛 `, `💙 `, `💜 `, `💚 `, `❤️ `},
+		}
+	case Layer:
+		return Spinner{
+			Name:     Layer,
+			Interval: 150,
+			Frames:   []string{`-`, `=`, `≡`},
 		}
 	case Line:
 		return Spinner{
@@ -468,6 +489,12 @@ func Get(name Name) Spinner {
 			Name:     Pipe,
 			Interval: 100,
 			Frames:   []string{`┤`, `┘`, `┴`, `└`, `├`, `┌`, `┬`, `┐`},
+		}
+	case Point:
+		return Spinner{
+			Name:     Point,
+			Interval: 125,
+			Frames:   []string{`∙∙∙`, `●∙∙`, `∙●∙`, `∙∙●`, `∙∙∙`},
 		}
 	case Pong:
 		return Spinner{

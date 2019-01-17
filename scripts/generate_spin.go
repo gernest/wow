@@ -1,5 +1,3 @@
-// +build mage
-
 package main
 
 import (
@@ -8,30 +6,35 @@ import (
 	"fmt"
 	"go/format"
 	"io/ioutil"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
 	"text/template"
-
-	"github.com/magefile/mage/sh"
-
-	"github.com/magefile/mage/mg"
 )
+
+func main() {
+	err := Spinners()
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = ExampleAll()
+	if err != nil {
+		log.Fatal(err)
+	}
+}
 
 // Spinners generates easy/accessible Go types for spinners from
 // cli-spinners/spinners.json.
 func Spinners() error {
 	pkg := "spin"
-	mg.Deps(func() error {
-		_, err := os.Stat(pkg)
-		if err != nil {
-			if os.IsNotExist(err) {
-				return os.Mkdir(pkg, 0777)
-			}
-			return err
+	_, err := os.Stat(pkg)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return os.Mkdir(pkg, 0777)
 		}
-		return nil
-	})
+		return err
+	}
 	b, err := ioutil.ReadFile("cli-spinners/spinners.json")
 	if err != nil {
 		return err
@@ -210,19 +213,3 @@ func main() {
 }
 
 `
-
-// Update updates cli-spinners to get latest changes to the spinners.json file.
-func Update() error {
-	return sh.Run("git", "submodule", "update", "--remote", "cli-spinners")
-}
-
-//Setup prepares the project for local development.
-//
-//  This runs git submodule init && git submodule update
-func Setup() error {
-	err := sh.Run("git", "submodule", "init")
-	if err != nil {
-		return err
-	}
-	return sh.Run("git", "submodule", "update")
-}

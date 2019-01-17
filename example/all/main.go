@@ -9,11 +9,11 @@ import (
 	"github.com/gernest/wow/spin"
 )
 
-var all = []spin.Name{spin.Toggle6, spin.BouncingBall, spin.Balloon, spin.Toggle, spin.Toggle12, spin.Dots5, spin.Dots6, spin.Dots7, spin.GrowVertical, spin.Noise, spin.Toggle8, spin.SimpleDots, spin.BoxBounce2, spin.Arc, spin.BouncingBar, spin.Christmas, spin.Squish, spin.Triangle, spin.Arrow3, spin.Hearts, spin.Earth, spin.Dqpb, spin.Line2, spin.SquareCorners, spin.Toggle3, spin.Toggle5, spin.Monkey, spin.Clock, spin.Shark, spin.Weather, spin.Dots2, spin.Dots3, spin.Dots12, spin.CircleHalves, spin.Arrow, spin.Moon, spin.Flip, spin.Hamburger, spin.Bounce, spin.Circle, spin.Toggle9, spin.Toggle13, spin.Toggle10, spin.Runner, spin.Dots9, spin.Line, spin.Star, spin.CircleQuarters, spin.Arrow2, spin.Smiley, spin.Dots, spin.Dots4, spin.Pipe, spin.Balloon2, spin.Dots10, spin.Dots11, spin.SimpleDotsScrolling, spin.BoxBounce, spin.Toggle4, spin.Dots8, spin.Toggle2, spin.Toggle7, spin.Toggle11, spin.Pong, spin.Star2, spin.GrowHorizontal}
+var all = []spin.Name{spin.Dots5, spin.Dots11, spin.Line2, spin.Arc, spin.Toggle2, spin.Star, spin.Circle, spin.Earth, spin.Toggle4, spin.Arrow2, spin.BouncingBar, spin.Monkey, spin.Dots8, spin.BoxBounce2, spin.SquareCorners, spin.Toggle11, spin.Moon, spin.Triangle, spin.Toggle10, spin.Grenade, spin.Dots2, spin.Balloon, spin.CircleQuarters, spin.BouncingBall, spin.Point, spin.Smiley, spin.Noise, spin.Arrow, spin.Arrow3, spin.Line, spin.Pipe, spin.SimpleDots, spin.SimpleDotsScrolling, spin.Star2, spin.Dqpb, spin.Layer, spin.Dots12, spin.Hamburger, spin.Bounce, spin.Weather, spin.Dots9, spin.GrowHorizontal, spin.Toggle3, spin.Hearts, spin.Shark, spin.Dots6, spin.BoxBounce, spin.CircleHalves, spin.Toggle, spin.Toggle5, spin.Dots7, spin.GrowVertical, spin.Toggle13, spin.Christmas, spin.Balloon2, spin.Toggle7, spin.Toggle9, spin.Clock, spin.Runner, spin.Dots10, spin.Flip, spin.Toggle6, spin.Dots, spin.Squish, spin.Toggle12, spin.Dots3, spin.Dots4, spin.Toggle8, spin.Pong}
 
 func main() {
 	for _, v := range all {
-		w := wow.New(os.Stdout, spin.Get(v), " "+v.String(), wow.ForceOutput)
+		w := wow.New(os.Stdout, spin.Get(v), " "+v.String())
 		w.Start()
 		time.Sleep(2)
 		w.Persist()
