@@ -49,7 +49,7 @@ func (w *Wow) run(ctx context.Context) {
 			return
 		case <-t.C:
 			txt := erase + w.s.Frames[at%len(w.s.Frames)] + w.txt
-			if w.IsTerminal {
+			if w.IsTerminal && w.running {
 				fmt.Fprint(w.out, txt)
 			}
 			at++
@@ -70,10 +70,10 @@ func (w *Wow) Start() {
 
 // Stop stops the spinner
 func (w *Wow) Stop() {
+	w.running = false
 	if w.done != nil {
 		w.done()
 	}
-	w.running = false
 }
 
 // Spinner sets s to the current spinner
